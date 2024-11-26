@@ -2,23 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public enum Team
 {
-    private static GameManager instance = null;
+    Team1,
+    Team2
+}
 
-    private void Awake()
-    {
-        if (null == instance)
-        {
-            instance = this;
-
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-    }
+public class GameManager : Manager<GameManager>
+{
+    [SerializeField] private Transform team1Parent; // 우리 진영
+    [SerializeField] private Transform team2Parent; // 상대 진영
 
     public static GameManager Instance
     {
