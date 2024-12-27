@@ -18,6 +18,7 @@ public class GridManager : Manager<GridManager>
 
     // Graph Info
     [SerializeField] private Graph graph;
+    [SerializeField] private Transform graphParent;
 
     //Tile Info
     [SerializeField] private GameObject baseTile;
@@ -27,6 +28,21 @@ public class GridManager : Manager<GridManager>
     {
         Grid(9, 7, 1f);
         InitGraph();
+    }
+
+    public Node GetNodeForTile(Tile t)
+    {
+        var allNodes = graph.Nodes;
+
+        foreach (var node in allNodes)
+        {
+            if(t.transform.GetSiblingIndex() == node.index)
+            {
+                return node;
+            }
+        }
+
+        return null;
     }
 
     public void Grid(int screenWidth, int screenHeight, float cellSize)
@@ -41,17 +57,19 @@ public class GridManager : Manager<GridManager>
         int centerY = screenHeight>>1;
         Debug.Log(centerX + " , " + centerY);
 
-        for (int y = 0; y < screenHeight; y++)
+        for (int x = 0; x < screenWidth; x++)
         {
-            for (int x = 0; x < screenWidth; x++)
+            for (int y = 0; y < screenHeight; y++)
             {
-                GameObject tile = Instantiate(baseTile, new Vector3(x - centerX, y - centerY), Quaternion.Euler(Vector3.zero));
+                GameObject tile = Instantiate(baseTile, graphParent);
+                tile.transform.localPosition = new Vector3(x-centerX, y-centerY);
+                tile.AddComponent<Tile>();
+                tile.GetComponent<Tile>().Init();
+                tile.AddComponent<BoxCollider2D>();
+                tile.name = tiles.Count.ToString(); 
                 tiles.Add(tile);
             }
         }
-
-        //GameObject prefab = Instantiate(pattern, transform);
-        //prefab.transform.localPosition = GetWorldPositionCenter(centerY, centerX);
     }
 
     private void InitGraph()
@@ -62,6 +80,12 @@ public class GridManager : Manager<GridManager>
         {
             Vector3 pos = tiles[i].transform.position;
             graph.AddNode(pos);
+        }
+
+        for(int i = 0; i < graph.Nodes.Count; i++)
+        {
+            Tile tile = tiles[i].GetComponent<Tile>();
+            tile.NodeInfo = graph.Nodes[i];
         }
 
         var allNodes = graph.Nodes;
