@@ -122,20 +122,22 @@ public class Node
     public int index;   // 노드 인덱스 ( 0 ~ N )
     public Vector3 worldPosition; // 노드 위치
 
-    private bool occupied = false;  // 사용중?
+    private EntityBase entityOccupied;  // 사용중?
 
-    public Node(int index, Vector3 worldPosition, bool occupied = false)
+    public Node(int index, Vector3 worldPosition, EntityBase occupied = null)
     {
         this.index = index;
         this.worldPosition = worldPosition;
-        this.occupied = occupied;
+        this.entityOccupied = occupied;
     }
 
-    public bool IsOccupied
+    public EntityBase EntityOccupied
     {
-        get => occupied;
-        set => occupied = value;
+        get => entityOccupied;
+        set => entityOccupied = value;
     }
+
+    public bool IsOccupied => entityOccupied != null;
 }
 
 public class Edge

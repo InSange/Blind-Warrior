@@ -98,13 +98,26 @@ public class Draggable : MonoBehaviour
             {
                 if(releaseNode.IsOccupied)
                 {   // 만약 누군가 있다면? 해당 노드에 있는 엔티티의 정보를 가져와 스왑
+                    EntityBase targetObj = releaseNode.EntityOccupied;
+                    Debug.Log("서로 위치 변경");
+                    Node curNode = curEntity.EntityNode;
+                    targetObj.EntityNode = curNode;
+                    curNode.EntityOccupied = targetObj;
 
+                    curEntity.EntityNode = releaseNode;
+                    releaseNode.EntityOccupied = curEntity;
+
+                    targetObj.transform.position = curNode.worldPosition;
+                    curEntity.transform.position = releaseNode.worldPosition;
+                    Debug.Log("타겟 오브젝트의 노드 포지션 :  " + curNode.worldPosition + ", 현재 오브젝트의 노드 포지션 : " + releaseNode.worldPosition);
+
+                    return true;
                 }
                 else// if(!releaseNode.IsOccupied) 비워져있다면?
                 {
-                    if(curEntity.EntityNode != null) curEntity.EntityNode.IsOccupied = false; // 현재 노드 비우기
+                    if(curEntity.EntityNode != null) curEntity.EntityNode.EntityOccupied = null; // 현재 노드 비우기
                     curEntity.EntityNode = releaseNode;
-                    releaseNode.IsOccupied = true;
+                    releaseNode.EntityOccupied = curEntity;
                     curEntity.transform.position = releaseNode.worldPosition;
 
                     return true;
