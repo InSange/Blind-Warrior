@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,11 +17,11 @@ public class Graph
         nodes = new List<Node>();
         edges = new List<Edge>(); 
     }
-    // node ÁÖº¯ÀÇ ÀÌ¿ô ³ëµåµéÀ» Å½»ö
+    // node ì£¼ë³€ì˜ ì´ì›ƒ ë…¸ë“œë“¤ì„ íƒìƒ‰
     public List<Node> NeighborsNode(Node node)
     {
         List<Node> result = new List<Node>();
-        // ¸ğµç °£¼±¿¡¼­ from(½ÃÀÛÁ¡)ÀÌ nodeÀÏ °æ¿ì ¿¬°áµÇ¾î ÀÖ´Â to(¿¬°á ³ëµå)¸¦ Ãß°¡.
+        // ëª¨ë“  ê°„ì„ ì—ì„œ from(ì‹œì‘ì )ì´ nodeì¼ ê²½ìš° ì—°ê²°ë˜ì–´ ìˆëŠ” to(ì—°ê²° ë…¸ë“œ)ë¥¼ ì¶”ê°€.
         foreach(Edge e in edges)
         {
             if(e.from == node)
@@ -32,14 +32,14 @@ public class Graph
 
         return result;
     }
-    // ±×¸®µå¿¡ ÀÖ´Â Å¸ÀÏÀ» ³ëµå·Î ÀúÀå. (À§Ä¡ Æ÷ÇÔ)
+    // ê·¸ë¦¬ë“œì— ìˆëŠ” íƒ€ì¼ì„ ë…¸ë“œë¡œ ì €ì¥. (ìœ„ì¹˜ í¬í•¨)
     public void AddNode(Vector3 pos)
     {
         nodes.Add(new Node(nodes.Count, pos));
     }
-    // from ³ëµå¿¡¼­ to ³ëµå·ÎÀÇ °£¼±À» Edge¸®½ºÆ®¿¡ Ãß°¡.
+    // from ë…¸ë“œì—ì„œ to ë…¸ë“œë¡œì˜ ê°„ì„ ì„ Edgeë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€.
     public void AddEdge(Node from, Node to)
-    {   // from ³ëµå¿¡¼­ to ³ëµå·Î °£¼±ÀÇ °¡ÁßÄ¡¸¦ 1·Î ¼³Á¤ÇÏ¿© Ãß°¡.
+    {   // from ë…¸ë“œì—ì„œ to ë…¸ë“œë¡œ ê°„ì„ ì˜ ê°€ì¤‘ì¹˜ë¥¼ 1ë¡œ ì„¤ì •í•˜ì—¬ ì¶”ê°€.
         edges.Add(new Edge(from, to, 1));
     }
 
@@ -57,56 +57,56 @@ public class Graph
     }
 
     public virtual List<Node> GetShortestPath(Node start, Node end)
-    {   // ÃÖÁ¾ °æ·Î
+    {   // ìµœì¢… ê²½ë¡œ
         List<Node> path = new List<Node>();
 
-        if(start == end)    // Ãâ¹ßÁö¿Í µµÂøÁö°¡ °°´Ù¸é. Á¦ÀÚ¸®
+        if(start == end)    // ì¶œë°œì§€ì™€ ë„ì°©ì§€ê°€ ê°™ë‹¤ë©´. ì œìë¦¬
         {
             path.Add(start);
             return path;
         }
 
-        List<Node> unvisited = new List<Node>();    // ¹æ¹®ÇÏÁö ¾ÊÀº ³ëµåµé.
+        List<Node> unvisited = new List<Node>();    // ë°©ë¬¸í•˜ì§€ ì•Šì€ ë…¸ë“œë“¤.
 
-        Dictionary<Node, Node> previous = new Dictionary<Node, Node>(); // ¹æ¹®Çß´ø ³ëµåµé
+        Dictionary<Node, Node> previous = new Dictionary<Node, Node>(); // ë°©ë¬¸í–ˆë˜ ë…¸ë“œë“¤
 
-        Dictionary<Node, float> distances = new Dictionary<Node, float>();  // °¢ ³ëµåµéÀÇ °Å¸®
+        Dictionary<Node, float> distances = new Dictionary<Node, float>();  // ê° ë…¸ë“œë“¤ì˜ ê±°ë¦¬
 
         for(int i = 0; i < nodes.Count; i++)
         {
             Node node = nodes[i];
             unvisited.Add(node);
 
-            distances.Add(node, float.MaxValue);    // Ãâ¹ßÁö¸¦ ±âÁ¡À¸·Î °¢ ³ëµåµéÀÇ °Å¸®¸¦ ¹«ÇÑ´ë·Î ¼³Á¤. ´ÙÀÍ½ºÆ®¶ó
+            distances.Add(node, float.MaxValue);    // ì¶œë°œì§€ë¥¼ ê¸°ì ìœ¼ë¡œ ê° ë…¸ë“œë“¤ì˜ ê±°ë¦¬ë¥¼ ë¬´í•œëŒ€ë¡œ ì„¤ì •. ë‹¤ìµìŠ¤íŠ¸ë¼
         }
 
-        distances[start] = 0f;  // °¡Àå ¸ÕÀú Å½»öÇÒ Ãâ¹ßÁöÀÇ °Å¸®¸¦ 0À¸·Î ¼³Á¤
+        distances[start] = 0f;  // ê°€ì¥ ë¨¼ì € íƒìƒ‰í•  ì¶œë°œì§€ì˜ ê±°ë¦¬ë¥¼ 0ìœ¼ë¡œ ì„¤ì •
         while (unvisited.Count != 0)
-        {   // °Å¸® Á¤·ÄÇØ¼­ °¡Àå Ã¹¹øÂ° (ÂªÀº)°Å¸®¿¡ ÀÖ´Â ³ëµå¸¦ ²¨³»¼­ Å½»ö. (Ãâ¹ßÁö°¡ Á¦ÀÏ ¸ÕÀúÀÓ!)
+        {   // ê±°ë¦¬ ì •ë ¬í•´ì„œ ê°€ì¥ ì²«ë²ˆì§¸ (ì§§ì€)ê±°ë¦¬ì— ìˆëŠ” ë…¸ë“œë¥¼ êº¼ë‚´ì„œ íƒìƒ‰. (ì¶œë°œì§€ê°€ ì œì¼ ë¨¼ì €ì„!)
             unvisited = unvisited.OrderBy(node => distances[node]).ToList();
             Node current = unvisited[0];
-            unvisited.Remove(current);  // Ãâ¹ßÁö·ÎºÎÅÍ ÇöÀç ³ëµå¸¦ Á¦°Å
+            unvisited.Remove(current);  // ì¶œë°œì§€ë¡œë¶€í„° í˜„ì¬ ë…¸ë“œë¥¼ ì œê±°
 
-            if (current == end) // µµÂøÇß´Ù¸é?
-            {   // ¹æ¹®Çß´ø ³ëµåµéÀ» Æ÷ÇÔ½ÃÅ²´Ù.
+            if (current == end) // ë„ì°©í–ˆë‹¤ë©´?
+            {   // ë°©ë¬¸í–ˆë˜ ë…¸ë“œë“¤ì„ í¬í•¨ì‹œí‚¨ë‹¤.
                 while (previous.ContainsKey(current))
-                {   // °æ·Î¿¡ ÇöÀç ³ëµå¸¦ ¸Ç ¾Õ¿¡ Ãß°¡. -> Á¡Á¡ ¹Ğ·Á³ª°¡¼­ ¸Ç Ã³À½ start°¡ Ã¹¹øÂ°·Î ¿È.
+                {   // ê²½ë¡œì— í˜„ì¬ ë…¸ë“œë¥¼ ë§¨ ì•ì— ì¶”ê°€. -> ì ì  ë°€ë ¤ë‚˜ê°€ì„œ ë§¨ ì²˜ìŒ startê°€ ì²«ë²ˆì§¸ë¡œ ì˜´.
                     path.Insert(0, current);
-                    current = previous[current]; // current·Î ÀÌ¾îÁ®ÀÖ´Â ºÎ¸ğ ³ëµå¸¦ current·Î º¯°æ
+                    current = previous[current]; // currentë¡œ ì´ì–´ì ¸ìˆëŠ” ë¶€ëª¨ ë…¸ë“œë¥¼ currentë¡œ ë³€ê²½
                 }
-                // Ãâ¹ßÁö ³Ö±â!
+                // ì¶œë°œì§€ ë„£ê¸°!
                 path.Insert(0, current);
                 break;
             }
-            // ÇöÀç ³ëµå¸¦ ÁßÁ¡À¸·Î ÀÎÁ¢ÇØ ÀÖ´Â ÀÌ¿ô ³ëµåµéÀ» Å½»ö
+            // í˜„ì¬ ë…¸ë“œë¥¼ ì¤‘ì ìœ¼ë¡œ ì¸ì ‘í•´ ìˆëŠ” ì´ì›ƒ ë…¸ë“œë“¤ì„ íƒìƒ‰
             foreach (Node neighbor in NeighborsNode(current))
-            {   // ÇöÀç ³ëµå¿Í ÀÌ¿ô ³ëµåÀÇ ±æÀÌ¸¦ ±¸ÇÏ°í
+            {   // í˜„ì¬ ë…¸ë“œì™€ ì´ì›ƒ ë…¸ë“œì˜ ê¸¸ì´ë¥¼ êµ¬í•˜ê³ 
                 float length = Vector3.Distance(current.worldPosition, neighbor.worldPosition);
-                // ±æÀÌ¿Í ÇöÀç ³ëµåÀÇ °Å¸® °ª(Ãâ¹ßÁö·Î ºÎÅÍ)À» ÇÕÇÑ´Ù.
+                // ê¸¸ì´ì™€ í˜„ì¬ ë…¸ë“œì˜ ê±°ë¦¬ ê°’(ì¶œë°œì§€ë¡œ ë¶€í„°)ì„ í•©í•œë‹¤.
                 float alt = distances[current] + length;
-                // ¸¸¾à ±¸ÇÑ °ªÀÌ ÃÖ¼Ò¶ó¸é
+                // ë§Œì•½ êµ¬í•œ ê°’ì´ ìµœì†Œë¼ë©´
                 if(alt < distances[neighbor])
-                {   // ÀÌ¿ô ³ëµåÀÇ ºÎ¸ğ ³ëµå¸¦ ÇöÀç ³ëµå·Î º¯°æÇÏ°í °Å¸®¸¦ ¾÷µ¥ÀÌÆ®.
+                {   // ì´ì›ƒ ë…¸ë“œì˜ ë¶€ëª¨ ë…¸ë“œë¥¼ í˜„ì¬ ë…¸ë“œë¡œ ë³€ê²½í•˜ê³  ê±°ë¦¬ë¥¼ ì—…ë°ì´íŠ¸.
                     distances[neighbor] = alt;
                     previous[neighbor] = current;
                 }
@@ -119,10 +119,10 @@ public class Graph
 
 public class Node
 {
-    public int index;   // ³ëµå ÀÎµ¦½º ( 0 ~ N )
-    public Vector3 worldPosition; // ³ëµå À§Ä¡
+    public int index;   // ë…¸ë“œ ì¸ë±ìŠ¤ ( 0 ~ N )
+    public Vector3 worldPosition; // ë…¸ë“œ ìœ„ì¹˜
 
-    private EntityBase entityOccupied;  // »ç¿ëÁß?
+    private EntityBase entityOccupied;  // ì‚¬ìš©ì¤‘?
 
     public Node(int index, Vector3 worldPosition, EntityBase occupied = null)
     {
@@ -142,10 +142,10 @@ public class Node
 
 public class Edge
 {
-    public Node from; // ½ÃÀÛ ³ëµå
-    public Node to; // µµÂø ³ëµå
+    public Node from; // ì‹œì‘ ë…¸ë“œ
+    public Node to; // ë„ì°© ë…¸ë“œ
 
-    private float weight;   // °¡ÁßÄ¡ (1, ¹«ÇÑˆÛ)
+    private float weight;   // ê°€ì¤‘ì¹˜ (1, ë¬´í•œëŒ¸)
 
     public Edge(Node from, Node to, float weight)
     {

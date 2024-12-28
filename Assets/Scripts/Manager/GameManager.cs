@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,8 +10,8 @@ public enum Team
 
 public class GameManager : Manager<GameManager>
 {
-    [SerializeField] private Transform team1Parent; // ¿ì¸® Áø¿µ
-    [SerializeField] private Transform team2Parent; // »ó´ë Áø¿µ
+    [SerializeField] private Transform team1Parent; // ìš°ë¦¬ ì§„ì˜
+    [SerializeField] private Transform team2Parent; // ìƒëŒ€ ì§„ì˜
 
     public Transform Team1Parent
     {

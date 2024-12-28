@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,23 +23,23 @@ public class Pattern : MonoBehaviour
         return new Vector3(x - 0.5f, y - 0.5f);
     }
     /// <summary>
-    /// ÆĞÅÏ Á¾·á -> °ÔÀÓ ¿ÀºêÁ§Æ® ºñÈ°¼ºÈ­
-    /// ¾Ö´Ï¸ŞÀÌÅÍ ÀÌº¥Æ®·Î »ç¿ë
+    /// íŒ¨í„´ ì¢…ë£Œ -> ê²Œì„ ì˜¤ë¸Œì íŠ¸ ë¹„í™œì„±í™”
+    /// ì• ë‹ˆë©”ì´í„° ì´ë²¤íŠ¸ë¡œ ì‚¬ìš©
     /// </summary>
     void OffPattern()
     {
         gameObject.SetActive(false);
     }
     /// <summary>
-    /// °ø°İ ½ÃÀÛ -> Äİ¶óÀÌ´õ È°¼ºÈ­ -> ÇÃ·¹ÀÌ¾î trigger °¨Áö
-    /// ¾Ö´Ï¸ŞÀÌÅÍ ÀÌº¥Æ®·Î »ç¿ë
+    /// ê³µê²© ì‹œì‘ -> ì½œë¼ì´ë” í™œì„±í™” -> í”Œë ˆì´ì–´ trigger ê°ì§€
+    /// ì• ë‹ˆë©”ì´í„° ì´ë²¤íŠ¸ë¡œ ì‚¬ìš©
     /// </summary>
     void AttackStart()
     {
         col.enabled = true;
     }
     /// <summary>
-    /// °ø°İ Á¾·á -> Äİ¶óÀÌ´õ ºñÈ°¼ºÈ­
+    /// ê³µê²© ì¢…ë£Œ -> ì½œë¼ì´ë” ë¹„í™œì„±í™”
     /// </summary>
     void AttackFinish()
     {

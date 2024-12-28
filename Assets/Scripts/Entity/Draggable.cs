@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,7 +26,7 @@ public class Draggable : MonoBehaviour
 
     public void OnDragStart()
     {
-        Debug.Log("µå·¡±× ½ºÅ¸Æ®");
+        Debug.Log("ë“œë˜ê·¸ ìŠ¤íƒ€íŠ¸");
         previousPos = this.transform.position;
         previousSortingOrder = spriteRenderer.sortingOrder;
 
@@ -46,7 +46,7 @@ public class Draggable : MonoBehaviour
         newPos.z = 0;
         this.transform.position = newPos;
 
-        Tile tile = CheckTile();    // ³» ¸¶¿ì½º Æ÷ÀÎÅÍ À§Ä¡¿¡ ÀÖ´Â Å¸ÀÏ °¡Á®¿À±â.
+        Tile tile = CheckTile();    // ë‚´ ë§ˆìš°ìŠ¤ í¬ì¸í„° ìœ„ì¹˜ì— ìˆëŠ” íƒ€ì¼ ê°€ì ¸ì˜¤ê¸°.
 
         if(tile)
         {
@@ -97,9 +97,9 @@ public class Draggable : MonoBehaviour
             if (releaseNode != null && curEntity != null)
             {
                 if(releaseNode.IsOccupied)
-                {   // ¸¸¾à ´©±º°¡ ÀÖ´Ù¸é? ÇØ´ç ³ëµå¿¡ ÀÖ´Â ¿£Æ¼Æ¼ÀÇ Á¤º¸¸¦ °¡Á®¿Í ½º¿Ò
+                {   // ë§Œì•½ ëˆ„êµ°ê°€ ìˆë‹¤ë©´? í•´ë‹¹ ë…¸ë“œì— ìˆëŠ” ì—”í‹°í‹°ì˜ ì •ë³´ë¥¼ ê°€ì ¸ì™€ ìŠ¤ì™‘
                     EntityBase targetObj = releaseNode.EntityOccupied;
-                    Debug.Log("¼­·Î À§Ä¡ º¯°æ");
+                    Debug.Log("ì„œë¡œ ìœ„ì¹˜ ë³€ê²½");
                     Node curNode = curEntity.EntityNode;
                     targetObj.EntityNode = curNode;
                     curNode.EntityOccupied = targetObj;
@@ -109,13 +109,13 @@ public class Draggable : MonoBehaviour
 
                     targetObj.transform.position = curNode.worldPosition;
                     curEntity.transform.position = releaseNode.worldPosition;
-                    Debug.Log("Å¸°Ù ¿ÀºêÁ§Æ®ÀÇ ³ëµå Æ÷Áö¼Ç :  " + curNode.worldPosition + ", ÇöÀç ¿ÀºêÁ§Æ®ÀÇ ³ëµå Æ÷Áö¼Ç : " + releaseNode.worldPosition);
+                    Debug.Log("íƒ€ê²Ÿ ì˜¤ë¸Œì íŠ¸ì˜ ë…¸ë“œ í¬ì§€ì…˜ :  " + curNode.worldPosition + ", í˜„ì¬ ì˜¤ë¸Œì íŠ¸ì˜ ë…¸ë“œ í¬ì§€ì…˜ : " + releaseNode.worldPosition);
 
                     return true;
                 }
-                else// if(!releaseNode.IsOccupied) ºñ¿öÁ®ÀÖ´Ù¸é?
+                else// if(!releaseNode.IsOccupied) ë¹„ì›Œì ¸ìˆë‹¤ë©´?
                 {
-                    if(curEntity.EntityNode != null) curEntity.EntityNode.EntityOccupied = null; // ÇöÀç ³ëµå ºñ¿ì±â
+                    if(curEntity.EntityNode != null) curEntity.EntityNode.EntityOccupied = null; // í˜„ì¬ ë…¸ë“œ ë¹„ìš°ê¸°
                     curEntity.EntityNode = releaseNode;
                     releaseNode.EntityOccupied = curEntity;
                     curEntity.transform.position = releaseNode.worldPosition;

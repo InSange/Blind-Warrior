@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ public class WeaponParent : MonoBehaviour
 
     public bool IsAttacking;
     /// <summary>
-    /// ¹«±â ¾÷µ¥ÀÌÆ®
+    /// ë¬´ê¸° ì—…ë°ì´íŠ¸
     /// </summary>
-    /// <param name="pointer"> ¸¶¿ì½ºÆ÷ÀÎÅÍ°¡ ¹Ù¶óº¸´Â ¹æÇâÀ¸·Î ¹«±â¸¦ ¿Å°ÜÁØ´Ù. </param>
+    /// <param name="pointer"> ë§ˆìš°ìŠ¤í¬ì¸í„°ê°€ ë°”ë¼ë³´ëŠ” ë°©í–¥ìœ¼ë¡œ ë¬´ê¸°ë¥¼ ì˜®ê²¨ì¤€ë‹¤. </param>
     public void WeaponUpdate(Vector2 pointer)
     {
         if (IsAttacking)
@@ -47,7 +47,7 @@ public class WeaponParent : MonoBehaviour
         }
     }
     /// <summary>
-    /// °ø°İ! ¾Ö´Ï¸ŞÀÌ¼Ç Æ®¸®°Å ¹ßµ¿
+    /// ê³µê²©! ì• ë‹ˆë©”ì´ì…˜ íŠ¸ë¦¬ê±° ë°œë™
     /// </summary>
     public void Attack()
     {
@@ -55,14 +55,14 @@ public class WeaponParent : MonoBehaviour
         weaponAnim.SetTrigger("attack");
     }
     /// <summary>
-    /// WeaponParent ¿ÀºêÁ§Æ®ÀÇ Animator¿¡ Event·Î »ç¿ë
+    /// WeaponParent ì˜¤ë¸Œì íŠ¸ì˜ Animatorì— Eventë¡œ ì‚¬ìš©
     /// </summary>
     public void ResetIsAttack()
     {
         IsAttacking = false;
     }
     /// <summary>
-    /// °ø°İ ¹üÀ§ CHECK
+    /// ê³µê²© ë²”ìœ„ CHECK
     /// </summary>
     private void OnDrawGizmosSelected()
     {
@@ -72,7 +72,7 @@ public class WeaponParent : MonoBehaviour
     }
 
     /// <summary>
-    /// WeaponParent ¿ÀºêÁ§Æ®ÀÇ Animator¿¡ Event·Î »ç¿ë
+    /// WeaponParent ì˜¤ë¸Œì íŠ¸ì˜ Animatorì— Eventë¡œ ì‚¬ìš©
     /// </summary>
     public void DetectColliders()
     {
